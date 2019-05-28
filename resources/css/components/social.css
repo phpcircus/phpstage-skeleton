@@ -1,0 +1,38 @@
+#social_side_links {
+    margin-top: 0.75rem;
+    list-style: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    list-style: none;
+    z-index: 99;
+}
+
+@screen md {
+    #social_side_links {
+        margin-top: 1rem;
+    }
+}
+
+#social_side_links li a {
+    padding: 5px;
+    display: block;
+}
+
+#social_side_links li a svg {
+    display: block;
+    max-width: 40px;
+    -webkit-transition:  background .2s ease-in-out;
+    -moz-transition:  background .2s ease-in-out;
+    -o-transition:  background .2s ease-in-out;
+    transition:  background .2s ease-in-out;
+}
+
+#social_side_links li a svg path {
+    fill: white;
+}
+
+#social_side_links li a:hover svg path {
+    fill: rgb(222, 224, 226);
+}

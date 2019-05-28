@@ -1,0 +1,91 @@
+{
+    "name": "phpcircus/phpstage-skeleton",
+    "description": "A Skeleton Laravel app for PHPStage projects",
+    "version": "1.0.0",
+    "keywords": [
+        "laravel",
+        "skeleton",
+        "phpstage",
+        "phpcircus",
+        "inertiajs"
+    ],
+    "homepage": "https://github.com/phpcircus/phpstage-skeleton",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Clayton Stone",
+            "email": "clay@phpstage.com",
+            "homepage": "https://phpstage.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2.0",
+        "doctrine/dbal": "^2.9",
+        "fideloper/proxy": "^4.0",
+        "fzaninotto/faker": "^1.4",
+        "inertiajs/inertia-laravel": "dev-master",
+        "laravel/framework": "5.8.*",
+        "laravel/horizon": "^2.0",
+        "laravel/tinker": "^1.0",
+        "openpsa/ranger": "^0.4.0",
+        "perfect-oblivion/adr": "^0.2",
+        "predis/predis": "^1.1",
+        "reinink/remember-query-strings": "^0.1.0",
+        "tightenco/ziggy": "^0.6.9"
+    },
+    "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.2",
+        "barryvdh/laravel-ide-helper": "^2.6",
+        "beyondcode/laravel-dump-server": "^1.0",
+        "filp/whoops": "^2.0",
+        "fzaninotto/faker": "^1.4",
+        "mockery/mockery": "^1.0",
+        "nunomaduro/collision": "^3.0",
+        "nunomaduro/phpinsights": "^1.2",
+        "phpunit/phpunit": "^7.5"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "bin-compat": "full"
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": [
+                "barryvdh/laravel-ide-helper"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "classmap": [
+            "database/seeds",
+            "database/factories"
+        ],
+        "files": [
+            "app/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    }
+}

@@ -1,0 +1,17 @@
+/* Tailwind Reset */
+@import 'tailwindcss/base';
+
+/* Custom Reset */
+@import 'reset';
+
+/* Custom Components */
+@import './components/main';
+
+/* Vendor Styles */
+@import './vendor/main';
+
+/* Tailwind Utilities */
+@import 'tailwindcss/utilities';
+
+/* Custom Utilities */
+@import './utilities/main';

@@ -1,0 +1,42 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:vue/recommended"
+    ],
+    "parserOptions": {
+        "parser": "babel-eslint",
+        "ecmaVersion": 2017
+    },
+    "globals": {
+        "Nova": true,
+        "axios": true,
+        "_": true,
+        "moment": true,
+        "DumpListener": true,
+        "Inertia": true,
+        "route": true
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+        "comma-dangle": ["warn", "always-multiline"],
+        "constructor-super": "warn",
+        "no-console": 1,
+        "no-const-assign": "warn",
+        "no-this-before-super": "warn",
+        "no-undef": "warn",
+        "no-unreachable": "warn",
+        "no-unused-vars": "warn",
+        "quotes": ["warn", "single"],
+        "semi": "off",
+        "space-before-function-paren": ["error", "always"],
+        "valid-typeof": "warn",
+        "vue/no-v-html": 0,
+        "vue/html-indent": ["error", 4],
+        "vue/max-attributes-per-line": false,
+        "vue/require-default-prop": false,
+        "vue/singleline-html-element-content-newline": false
+    }
+}

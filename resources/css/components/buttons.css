@@ -1,0 +1,17 @@
+.btn-blue {
+  @apply px-6 py-3 rounded bg-blue-700 text-white text-sm font-bold whitespace-no-wrap;
+
+  &:hover, &:focus { @apply bg-orange-500 }
+}
+
+.btn-muted {
+  @apply px-6 py-3 rounded bg-gray-100 border border-gray-400 text-gray-800 text-sm font-bold whitespace-no-wrap;
+
+  &:hover, &:focus { @apply bg-gray-600 text-white border-transparent }
+}
+
+.btn-text {
+  @apply px-6 py-3 text-gray-800 text-sm font-bold whitespace-no-wrap;
+
+  &:hover, &:focus { @apply text-gray-600 underline }
+}

@@ -1,0 +1,11 @@
+/dist
+/node_modules
+/vendor
+/public
+/tests
+/storage
+/routes
+/database
+/config
+/bootstrap
+/app

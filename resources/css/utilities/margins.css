@@ -1,0 +1,116 @@
+@responsive {
+    .mt-20p {
+        margin-top: 20px;
+    }
+    .mt-40p {
+        margin-top: 40px;
+    }
+    .mt-60p {
+        margin-top: 60px;
+    }
+    .mt-80p {
+        margin-top: 80px;
+    }
+    .mt-100p {
+        margin-top: 100px;
+    }
+    .mt-140p {
+        margin-top: 140px;
+    }
+    .mt-200p {
+        margin-top: 200px;
+    }
+    .mt-240p {
+        margin-top: 240px;
+    }
+    .mt-300p {
+        margin-top: 300px;
+    }
+    .mt-400p {
+        margin-top: 400px;
+    }
+    .mt-500p {
+        margin-top: 500px;
+    }
+    .mb-20p {
+        margin-bottom: 20px;
+    }
+    .mb-40p {
+        margin-bottom: 40px;
+    }
+    .mb-60p {
+        margin-bottom: 60px;
+    }
+    .mb-80p {
+        margin-bottom: 80px;
+    }
+    .mb-100p {
+        margin-bottom: 100px;
+    }
+    .mb-140p {
+        margin-bottom: 140px;
+    }
+    .mb-200p {
+        margin-bottom: 200px;
+    }
+    .mb-240p {
+        margin-bottom: 240px;
+    }
+    .mb-300p {
+        margin-bottom: 300px;
+    }
+    .mb-400p {
+        margin-bottom: 400px;
+    }
+    .mb-500p {
+        margin-bottom: 500px;
+    }
+    .mx-20p {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    .mx-40p {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+    .mx-60p {
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+    .mx-75p {
+        margin-left: 75px;
+        margin-right: 75px;
+    }
+    .mx-80p {
+        margin-left: 80px;
+        margin-right: 80px;
+    }
+    .mx-100p {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+    .mx-140p {
+        margin-left: 140px;
+        margin-right: 140px;
+    }
+    .mx-200p {
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+    .mx-240p {
+        margin-left: 240px;
+        margin-right: 240px;
+    }
+    .mx-300p {
+        margin-left: 300px;
+        margin-right: 300px;
+    }
+    .mx-400p {
+        margin-left: 400px;
+        margin-right: 400px;
+    }
+    .mx-500p {
+        margin-left: 500px;
+        margin-right: 500px;
+    }
+}

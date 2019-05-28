@@ -1,0 +1,42 @@
+dist: xenial
+language: php
+
+env:
+  global:
+    - SETUP=stable
+    - CC_TEST_REPORTER_ID=
+    - GIT_COMMITTED_AT=$(if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then git log -1 --pretty=format:%ct; else git log -1 --skip 1 --pretty=format:%ct; fi)
+
+matrix:
+  fast_finish: true
+  include:
+    - php: 7.2
+    - php: 7.3
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+services:
+  - redis-server
+  - mysql
+
+before_script:
+  - phpenv config-rm xdebug.ini || true
+  - printf "\n" | pecl install -f redis
+  - travis_retry composer self-update
+  - mysql -e 'CREATE DATABASE startup;'
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - if [ $(phpenv version-name) = "7.2" ]; then ./cc-test-reporter before-build; fi
+  - cp .env.example .env
+  - php artisan key:generate --no-interaction
+
+install:
+  - if [[ $SETUP = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
+
+after_script:
+  - if [ $(phpenv version-name) = "7.2" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT; fi
+
+script:
+  - vendor/bin/phpunit

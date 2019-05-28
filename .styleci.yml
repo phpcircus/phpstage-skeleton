@@ -1,0 +1,9 @@
+preset: laravel
+
+finder:
+  exclude:
+    - "tests"
+    - "bootstrap"
+    - "config"
+    - "vendor"
+    - "public"
