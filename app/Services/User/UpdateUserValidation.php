@@ -15,6 +15,7 @@ class UpdateUserValidation extends ValidationService
     public function rules()
     {
         return [
+            'id' => ['required', 'numeric'],
             'name' => ['required', 'max:50'],
             'email' => ['required', 'max:50', 'email', Rule::unique('users')->ignore($this->validationData()['id'])],
             'password' => ['nullable'],

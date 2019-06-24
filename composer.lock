@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "78f755fe5744f0bd5c25fa7fefeddec9",
+    "content-hash": "499011ed6387452954c653061975151f",
     "packages": [
         {
             "name": "cakephp/chronos",
@@ -2391,6 +2391,53 @@
                 "query-strings"
             ],
             "time": "2019-04-02T17:35:40+00:00"
+        },
+        {
+            "name": "spatie/data-transfer-object",
+            "version": "1.8.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/data-transfer-object.git",
+                "reference": "06704275d0be83f3891342c5b165aaeacb94e8de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/data-transfer-object/zipball/06704275d0be83f3891342c5b165aaeacb94e8de",
+                "reference": "06704275d0be83f3891342c5b165aaeacb94e8de",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "larapack/dd": "^1.0",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\DataTransferObject\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Roose",
+                    "email": "brent@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Data transfer objects with batteries included",
+            "homepage": "https://github.com/spatie/data-transfer-object",
+            "keywords": [
+                "data-transfer-object",
+                "spatie"
+            ],
+            "time": "2019-03-18T08:09:17+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

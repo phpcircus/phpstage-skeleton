@@ -3,6 +3,7 @@
 namespace App\Http\Actions\User;
 
 use App\Models\User;
+use App\Http\DTO\UserData;
 use Illuminate\Http\Request;
 use PerfectOblivion\Actions\Action;
 use App\Services\User\UpdateUserService;
@@ -44,10 +45,10 @@ class UpdateUser extends Action
             return redirect()->back()->with(['warning' => 'You do not have permission to edit this user.']);
         }
 
-        $updated = UpdateUserService::call($user, $request->only('id', 'name', 'email'));
+        $updated = UpdateUserService::call($user, UserData::fromArray($request->only(['id', 'name', 'email'])));
 
         if ($request->password) {
-            UpdateUserPasswordService::call($user, $request->only('password'));
+            UpdateUserPasswordService::call($user, UserData::fromArray($request->only(['password'])));
         }
 
         return $this->responder->withPayload($updated)->respond();

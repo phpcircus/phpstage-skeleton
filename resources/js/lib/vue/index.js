@@ -10,7 +10,18 @@ import Dispatchable from 'Mixins/Dispatchable';
 import Snotify, { SnotifyPosition } from 'vue-snotify';
 
 // Use mixins
-Vue.mixin({ methods: { route: (...args) => window.route(...args).url() } });
+Vue.mixin({
+    methods: {
+         route: (...args) => window.route(...args).url(),
+         isObjectEmpty: (obj) => ! Object.values(obj).length >= 1,
+         objectContains: (obj, needle) => {
+            if (typeof obj === 'object' && obj !== null) {
+                return obj.hasOwnProperty(needle);
+            }
+            return false;
+         },
+    },
+});
 Vue.mixin(Dispatchable);
 Vue.mixin(ParsesUrls);
 Vue.mixin(Dates);
@@ -41,6 +52,11 @@ Vue.use(Inertia);
 // Filters
 Vue.filter('ucase', function (value) {
     return value ? value.toUpperCase() : '';
+});
+
+Vue.filter('capitalize', value => {
+    if (typeof value !== 'string') return ''
+    return value.charAt(0).toUpperCase() + value.slice(1)
 });
 
 if (process.env.MIX_APP_ENV === 'production') {
