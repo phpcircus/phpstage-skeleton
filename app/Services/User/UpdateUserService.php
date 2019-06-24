@@ -3,6 +3,7 @@
 namespace App\Services\User;
 
 use App\Models\User;
+use App\Http\DTO\UserData;
 use PerfectOblivion\Services\Traits\SelfCallingService;
 
 class UpdateUserService
@@ -25,15 +26,15 @@ class UpdateUserService
     /**
      * Handle the call to the service.
      *
+     * @param  \App\Models\User  $user
+     * @param  \App\Http\DTO\UserData  $data
+     *
      * @return mixed
      */
-    public function run(User $user, array $params)
+    public function run(User $user, UserData $data)
     {
-        $this->validator->validate($params);
+        $this->validator->validate($data->toArray());
 
-        return $user->updateUserData([
-            'name' => $params['name'],
-            'email' => $params['email'],
-        ]);
+        return $user->updateUserData($data->only('name', 'email'));
     }
 }

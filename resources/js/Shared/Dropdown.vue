@@ -14,8 +14,10 @@
 
 <script>
 import Popper from 'popper.js';
+import Dispatchable from 'Mixins/Dispatchable';
 
 export default {
+    mixins: [ Dispatchable ],
     props: {
         placement: {
             type: String,
@@ -52,6 +54,9 @@ export default {
             if (e.keyCode === 27) {
                 this.close();
             }
+        });
+        this.$listen('modal-opened-from-dropdown', () => {
+            this.close();
         });
     },
     methods: {

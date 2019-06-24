@@ -2,6 +2,7 @@
 
 namespace App\Http\Actions\User;
 
+use App\Http\DTO\UserData;
 use Illuminate\Http\Request;
 use PerfectOblivion\Actions\Action;
 use App\Services\User\StoreUserService;
@@ -31,7 +32,7 @@ class StoreUser extends Action
      */
     public function __invoke(Request $request)
     {
-        $created = StoreUserService::call($request->only(['name', 'email', 'password']));
+        $created = StoreUserService::call(UserData::fromRequest($request));
 
         return $this->responder->withPayload($created)->respond();
     }

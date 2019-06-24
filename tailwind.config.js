@@ -101,8 +101,16 @@ module.exports = {
         textColor: ['responsive', 'hover', 'focus', 'group-hover'],
         fill: ['hover', 'focus', 'group-hover'],
         width: ['responsive'],
+        margin: ['last-child', 'responsive'],
     },
     plugins: [
         require('./resources/js/lib/tailwindcss/plugins/tables')(),
+        function ({ addVariant, e }) {
+            addVariant('last-child', ({ modifySelectors, separator }) => {
+                modifySelectors(({ className }) => {
+                    return `.${e(`last-child${separator}${className}`)}:last-child`
+                })
+            })
+        },
     ],
 }
