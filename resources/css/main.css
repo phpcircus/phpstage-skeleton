@@ -4,6 +4,9 @@
 /* Custom Reset */
 @import 'reset';
 
+/* Tailwind Components */
+@import 'tailwindcss/components';
+
 /* Custom Components */
 @import './components/main';
 
