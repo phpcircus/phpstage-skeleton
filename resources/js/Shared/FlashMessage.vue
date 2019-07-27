@@ -27,7 +27,7 @@ export default {
             handler (value) {
                 if (value.info) {
                     this.$snotify.clear();
-                    this.$snotify.error(value.info, 'Information:');
+                    this.$snotify.info(value.info, 'Information:');
                 }
             },
             deep: true,
@@ -38,12 +38,10 @@ export default {
             this.$snotify.clear();
             this.$snotify.success(this.$page.success.success, 'Success!');
         }
-
         if (this.$page.warning.warning) {
             this.$snotify.clear();
-            this.$snotify.warning(this.$page.warning.warning, 'Oops!');
+            this.$snotify.error(this.$page.warning.warning, 'Oops!');
         }
-
         if (this.$page.info.info) {
             this.$snotify.clear();
             this.$snotify.info(this.$page.info.info, 'Information:');

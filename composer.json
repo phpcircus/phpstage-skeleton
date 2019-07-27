@@ -1,7 +1,7 @@
 {
     "name": "phpcircus/phpstage-skeleton",
     "description": "A Skeleton Laravel app for PHPStage projects",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "keywords": [
         "laravel",
         "skeleton",
