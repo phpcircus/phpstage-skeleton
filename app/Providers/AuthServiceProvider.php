@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -39,7 +40,7 @@ class AuthServiceProvider extends ServiceProvider
     public function checkAdmins(User $authenticated)
     {
         return in_array($authenticated->email, [
-            'clay@phpstage.com',
+            Config::get('auth.admin.email'),
         ]);
     }
 }
