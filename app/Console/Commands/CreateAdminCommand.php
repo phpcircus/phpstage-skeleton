@@ -47,7 +47,7 @@ class CreateAdminCommand extends Command
             'is_admin' => true,
         ]);
 
-        $admin = $this->users->createUser($data);
+        $admin = $this->users->createUser($data->only(['name', 'email', 'password', 'email_verified_at', 'is_admin']));
 
         $this->comment("Admin account for {$admin->name} successfully created.");
     }

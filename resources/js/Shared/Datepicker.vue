@@ -44,6 +44,11 @@ export default {
             date: this.value,
         }
     },
+    created () {
+        this.$listen('clearDateField', () => {
+            this.date = null;
+        });
+    },
     methods: {
         customFormatter (date) {
             return moment.utc(date).format('YYYY-MM-DD');

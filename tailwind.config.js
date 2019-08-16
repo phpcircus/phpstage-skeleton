@@ -112,5 +112,6 @@ module.exports = {
                 })
             })
         },
-    ],
+        require('@tailwindcss/custom-forms'),
+      ],
 }

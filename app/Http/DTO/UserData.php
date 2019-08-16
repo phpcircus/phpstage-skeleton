@@ -3,10 +3,8 @@
 namespace App\Http\DTO;
 
 use Illuminate\Http\Request;
-use Spatie\DataTransferObject\DataTransferObject;
-use Carbon\CarbonImmutable;
 
-class UserData extends DataTransferObject
+class UserData extends Data
 {
     /** @var int|null */
     public $id;
@@ -20,9 +18,6 @@ class UserData extends DataTransferObject
     /** @var string|null */
     public $password;
 
-    /** @var \Carbon\CarbonImmutable|null */
-    public $email_verified_at;
-
     /** @var bool */
     public $is_admin;
 
@@ -33,22 +28,7 @@ class UserData extends DataTransferObject
      */
     public function __construct(array $parameters)
     {
-        $verified = $parameters['email_verified_at'] ?? null;
-        $parameters['id'] = (int) $parameters['id'] ?? null;
-        $parameters['name'] = (string) $parameters['name'] ?? null;
-        $parameters['email'] = (string) $parameters['email'] ?? null;
-        $parameters['password'] = (string) $parameters['password'] ?? null;
-        $parameters['is_admin'] = (bool) $parameters['is_admin'] ?? false;
-
-        if ($verified) {
-            if (is_string($verified)) {
-                $parameters['email_verified_at'] = new CarbonImmutable($verified);
-            } elseif (! $verified instanceof CarbonImmutable) {
-                $parameters['email_verified_at'] = null;
-            }
-        }
-
-        parent::__construct($parameters);
+        parent::__construct($this->validate($parameters));
     }
 
     /**
@@ -58,7 +38,7 @@ class UserData extends DataTransferObject
      */
     public static function fromRequest(Request $request): UserData
     {
-        return static::fromArray($request->only(['name', 'email', 'password']));
+        return static::fromArray($request->only(['id', 'name', 'email', 'password', 'is_admin']));
     }
 
     /**
@@ -72,9 +52,30 @@ class UserData extends DataTransferObject
             'id' => $data['id'] ?? null,
             'name' => $data['name'] ?? null,
             'email' => $data['email'] ?? null,
-            'email_verified_at' => $data['email_verified_at'] ?? null,
-            'is_admin' => $data['is_admin'] ?? null,
+            'is_admin' => $data['is_admin'] ?? false,
             'password' => $data['password'] ?? null,
         ]);
+    }
+
+    /**
+     * Validate the given parameters.
+     *
+     * @param  array  $parameters
+     */
+    public function validate(array $parameters): array
+    {
+        $id = isset($parameters['id']) ? (string) $parameters['id'] : null;
+        $name = isset($parameters['name']) ? (string) $parameters['name'] : null;
+        $email = isset($parameters['email']) ? (string) $parameters['email'] : null;
+        $isAdmin = isset($parameters['is_admin']) ? (bool) $parameters['is_admin'] : false;
+        $password = isset($parameters['password']) ? (string) $parameters['password'] : null;
+
+        $parameters['id'] = $id;
+        $parameters['name'] = $name;
+        $parameters['email'] = $email;
+        $parameters['is_admin'] = $isAdmin;
+        $parameters['password'] = $password;
+
+        return $parameters;
     }
 }

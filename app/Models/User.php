@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Http\DTO\UserData;
+use App\Models\Traits\Uuid\HasUuids;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -12,9 +12,10 @@ use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
 class User extends Authenticatable implements AuthorizableContract, MustVerifyEmail
 {
+    use HasUuids;
+    use Notifiable;
     use SoftDeletes;
     use Authorizable;
-    use Notifiable;
 
     /** @var array */
     protected $guarded = [];
@@ -88,17 +89,17 @@ class User extends Authenticatable implements AuthorizableContract, MustVerifyEm
     /**
      * Create a user with the provided data.
      *
-     * @param  \App\Http\DTO\UserData  $user
+     * @param  array  $user
      *
      * @return \App\Models\User
      */
-    public function createUser(UserData $user)
+    public function createUser(array $user)
     {
         return $this->create([
-            'name' => $user->name,
-            'email' => $user->email,
-            'password' => bcrypt($user->password),
-            'is_admin' => $user->is_admin,
+            'name' => $user['name'],
+            'email' => $user['email'],
+            'password' => bcrypt($user['password']),
+            'is_admin' => $user['is_admin'],
         ]);
     }
 
@@ -129,29 +130,29 @@ class User extends Authenticatable implements AuthorizableContract, MustVerifyEm
     /**
      * Update user data.
      *
-     * @param  \App\Http\DTO\UserData  $data
+     * @param  array  $data
      *
      * @return \App\Models\User
      */
-    public function updateUserData(UserData $data)
+    public function updateUserData(array $data)
     {
         return tap($this, function ($user) use ($data) {
-            return $user->update($data->toArray());
+            return $user->update($data);
         })->fresh();
     }
 
     /**
      * Update user password.
      *
-     * @param  \App\Http\DTO\UserData  $data
+     * @param  array  $data
      *
      * @return \App\Models\User
      */
-    public function updateUserPassword(UserData $data)
+    public function updateUserPassword(array $data)
     {
         return tap($this, function ($user) use ($data) {
             return $user->update([
-                'password' => bcrypt($data->password),
+                'password' => bcrypt($data['password']),
             ]);
         })->fresh();
     }

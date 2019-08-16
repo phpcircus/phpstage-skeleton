@@ -1,6 +1,29 @@
 <?php
-
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Horizon Domain
+    |--------------------------------------------------------------------------
+    |
+    | This is the subdomain where Horizon will be accessible from. If this
+    | setting is null, Horizon will reside under the same domain as the
+    | application. Otherwise, this value will serve as the subdomain.
+    |
+    */
+    'domain' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Horizon Path
+    |--------------------------------------------------------------------------
+    |
+    | This is the URI path where Horizon will be accessible from. Feel free
+    | to change this path to anything you like. Note that the URI will not
+    | affect the paths of its internal API that aren't exposed to users.
+    |
+    */
+    'path' => 'horizon',
+
     /*
     |--------------------------------------------------------------------------
     | Horizon Redis Connection
@@ -11,7 +34,6 @@ return [
     | of supervisors, failed jobs, job metrics, and other information.
     |
     */
-
     'use' => 'default',
 
     /*
@@ -24,7 +46,6 @@ return [
     | of Horizon on the same server so that they don't have problems.
     |
     */
-
     'prefix' => env('HORIZON_PREFIX', 'horizon:'),
 
     /*
@@ -37,7 +58,6 @@ return [
     | the existing middleware. Or, you can simply stick with this list.
     |
     */
-
     'middleware' => ['web'],
 
     /*
@@ -50,7 +70,6 @@ return [
     | own, unique threshold (in seconds) before this event is fired.
     |
     */
-
     'waits' => [
         'redis:default' => 60,
     ],
@@ -65,9 +84,9 @@ return [
     | for one hour while all failed jobs are stored for an entire week.
     |
     */
-
     'trim' => [
         'recent' => 60,
+        'recent_failed' => 10080,
         'failed' => 10080,
         'monitored' => 10080,
     ],
@@ -84,7 +103,6 @@ return [
     | instance will continue to terminate each of its workers.
     |
     */
-
     'fast_termination' => false,
 
     /*
@@ -97,7 +115,6 @@ return [
     | this value according to the resources available to your server.
     |
     */
-
     'memory_limit' => 64,
 
     /*
@@ -110,50 +127,34 @@ return [
     | queued jobs and will be provisioned by Horizon during deployment.
     |
     */
-
     'environments' => [
         'production' => [
             'supervisor-1' => [
                 'connection' => 'redis',
-                'queue' => ['email'],
+                'queue' => ['main'],
                 'balance' => 'simple',
                 'processes' => 10,
                 'tries' => 3,
             ],
             'supervisor-2' => [
                 'connection' => 'redis',
-                'queue' => ['images'],
-                'balance' => 'simple',
-                'processes' => 10,
-                'tries' => 3,
-            ],
-            'supervisor-3' => [
-                'connection' => 'redis',
-                'queue' => ['misc'],
+                'queue' => ['secondary'],
                 'balance' => 'simple',
                 'processes' => 10,
                 'tries' => 3,
             ],
         ],
-
         'local' => [
             'supervisor-1' => [
                 'connection' => 'redis',
-                'queue' => ['email'],
+                'queue' => ['main'],
                 'balance' => 'simple',
                 'processes' => 3,
                 'tries' => 3,
             ],
             'supervisor-2' => [
                 'connection' => 'redis',
-                'queue' => ['images'],
-                'balance' => 'simple',
-                'processes' => 3,
-                'tries' => 3,
-            ],
-            'supervisor-3' => [
-                'connection' => 'redis',
-                'queue' => ['misc'],
+                'queue' => ['secondary'],
                 'balance' => 'simple',
                 'processes' => 3,
                 'tries' => 3,

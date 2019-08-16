@@ -86,7 +86,7 @@ class ProcessLogin extends Action
         $this->clearLoginAttempts($request);
 
         return $this->authenticated($request, $this->guard()->user())
-            ?: redirect()->intended(route('home'));
+            ?: redirect()->intended(route('dashboard'));
     }
 
     /**
@@ -99,7 +99,7 @@ class ProcessLogin extends Action
      */
     protected function authenticated(Request $request, $user)
     {
-        return redirect()->route('home')->with(['success' => 'Logged in!']);
+        return redirect()->route('dashboard')->with(['success' => 'Logged in!']);
     }
 
     /**

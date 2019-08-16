@@ -14,10 +14,8 @@
 
 <script>
 import Popper from 'popper.js';
-import Dispatchable from 'Mixins/Dispatchable';
 
 export default {
-    mixins: [ Dispatchable ],
     props: {
         placement: {
             type: String,
@@ -55,7 +53,7 @@ export default {
                 this.close();
             }
         });
-        this.$listen('modal-opened-from-dropdown', () => {
+        this.$listen('dropdown-should-close', () => {
             this.close();
         });
     },

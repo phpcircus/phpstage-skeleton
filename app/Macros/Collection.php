@@ -3,6 +3,7 @@
 namespace App\Macros;
 
 use Illuminate\Support\Arr;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Collection
 {
@@ -28,6 +29,35 @@ class Collection
             }
 
             return collect($results);
+        };
+    }
+
+    /**
+     * Paginate a Collection.
+     *
+     * @param  int  $perpage
+     *
+     * @return array
+     */
+    public function paginate()
+    {
+        return function (int $perPage = 5) {
+            $items = $this->all();
+            $page = (int) request()->input('page') ?: 1;
+            $offSet = ($page * $perPage) - $perPage;
+            $itemsForCurrentPage = array_slice($items, $offSet, $perPage, true);
+
+            $result = app()->make(LengthAwarePaginator::class, [
+                'items' => $itemsForCurrentPage,
+                'total' => count($items),
+                'perPage' => $perPage,
+                'currentPage' => $page,
+                [
+                    'path'  => '/home',
+                ],
+            ]);
+
+            return $result->toArray();
         };
     }
 }

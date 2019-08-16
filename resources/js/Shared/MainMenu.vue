@@ -1,9 +1,9 @@
 <template>
     <div :class="display">
         <div :class="margin">
-            <inertia-link class="flex items-center group py-3" :href="route('home')">
-                <icon name="home" class="w-4 h-4 mr-2" :class="isPath('home') ? 'fill-white' : 'fill-blue-300 group-hover:fill-white'" />
-                <div :class="isPath('home') ? 'text-white' : 'text-blue-200 group-hover:text-white'" class="text-xl">Home</div>
+            <inertia-link class="flex items-center group py-3" :href="route('dashboard')">
+                <icon name="home" class="w-4 h-4 mr-2" :class="isPath('dashboard') ? 'fill-white' : 'fill-blue-300 group-hover:fill-white'" />
+                <div :class="isPath('dashboard') ? 'text-white' : 'text-blue-200 group-hover:text-white'" class="text-xl">Dashboard</div>
             </inertia-link>
         </div>
         <div>
