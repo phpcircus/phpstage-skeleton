@@ -13,6 +13,8 @@ class DeleteUserResponder extends Responder
      */
     public function respond()
     {
-        return redirect()->route('users')->with(['success' => 'User deleted!']);
+        $this->request->session()->flash('success', 'User deleted!');
+
+        return redirect()->back();
     }
 }

@@ -57,7 +57,7 @@ class ProcessRegistration extends Action
         $this->guard()->login($user);
 
         return $this->registered($request, $user)
-            ?: redirect()->route('home');
+            ?: redirect()->route('dashboard');
     }
 
     /**
@@ -112,6 +112,6 @@ class ProcessRegistration extends Action
      */
     protected function registered(Request $request, $user)
     {
-        return redirect()->route('home')->with(['success' => 'User registered. Check your email to verify your account.']);
+        return redirect()->route('dashboard')->with(['success' => 'User registered. Check your email to verify your account.']);
     }
 }

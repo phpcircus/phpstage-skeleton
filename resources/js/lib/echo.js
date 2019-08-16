@@ -1,10 +1,11 @@
-// import Echo from 'laravel-echo'
+// import Echo from 'laravel-echo';
+// import { config } from 'Config';
 
 // window.Pusher = require('pusher-js');
 
 // window.Echo = new Echo({
 //     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
+//     key: config.pusherKey,
+//     cluster: config.pusherCluster,
+//     encrypted: true,
 // });

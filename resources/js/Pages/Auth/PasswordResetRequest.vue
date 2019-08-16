@@ -7,10 +7,10 @@
                     <div class="px-10 py-12">
                         <h1 class="text-center font-bold text-2xl">Password Reset Request</h1>
                         <div class="mx-auto mt-6 w-24 border-b-2" />
-                        <text-input v-model="form.email" class="mt-10" label="Email" :errors="errors.email" type="email" autofocus autocapitalize="off" />
+                        <text-input v-model="form.email" class="mt-10" label="Email" :errors="$page.errors.email" type="email" autofocus autocapitalize="off" />
                     </div>
                     <div class="px-10 py-4 bg-gray-100 border-t border-gray-200 flex justify-between items-center">
-                        <loading-button :loading="sending" class="btn-blue" type="submit">Email Password Reset Instructions</loading-button>
+                        <loading-button :loading="sending" class="btn btn-blue" type="submit">Email Password Reset Instructions</loading-button>
                     </div>
                 </form>
             </div>
@@ -30,12 +30,6 @@ export default {
         Logo,
         TextInput,
         BlankLayout,
-    },
-    props: {
-        errors: {
-            type: Object,
-            default: () => ({}),
-        },
     },
     data () {
         return {

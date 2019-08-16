@@ -35,6 +35,6 @@ class UpdateUserPasswordService
     {
         $this->validator->validate($data->toArray());
 
-        return $user->updateUserPassword($data);
+        return $user->updateUserPassword($data->only(['password']));
     }
 }

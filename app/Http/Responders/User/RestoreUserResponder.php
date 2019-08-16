@@ -13,6 +13,8 @@ class RestoreUserResponder extends Responder
      */
     public function respond()
     {
-        return redirect()->back()->with(['success' => 'User restored!']);
+        $this->request->session()->flash('success', 'User restored!');
+
+        return redirect()->back();
     }
 }

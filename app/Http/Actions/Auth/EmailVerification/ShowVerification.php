@@ -18,7 +18,7 @@ class ShowVerification extends Action
     public function __invoke(Request $request)
     {
         return $request->user()->hasVerifiedEmail()
-                        ? redirect()->route('home')->with(['info' => 'User already verified!'])
+                        ? redirect()->route('dashboard')->with(['info' => 'User already verified!'])
                         : Inertia::render('Auth/Verify');
     }
 }

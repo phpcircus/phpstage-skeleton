@@ -27,39 +27,61 @@ class InertiaServiceProvider extends ServiceProvider
             return md5_file(public_path('mix-manifest.json'));
         });
 
-        Inertia::share('app.name', Config::get('app.name'));
+        Inertia::share([
+            'auth' => function () {
+                $user = Auth::user();
 
-        Inertia::share('errors', static function () {
-            return Session::get('errors') ? Session::get('errors')->getBag('default')->getMessages() : (object) [];
-        });
-
-        Inertia::share('success', static function () {
-            return [
-                'success' => Session::get('success'),
-            ];
-        });
-
-        Inertia::share('warning', static function () {
-            return [
-                'warning' => Session::get('warning'),
-            ];
-        });
-
-        Inertia::share('info', static function () {
-            return [
-                'info' => Session::get('info'),
-            ];
-        });
-
-        Inertia::share('auth.user', static function () {
-            if ($user = Auth::user()) {
                 return [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                    'email' => $user->email,
-                    'is_admin' => $user->is_admin,
+                    'user' => $user ? [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'is_admin' => $user->is_admin,
+                        'deleted_at' => $user->deleted_at,
+                    ] : null,
                 ];
-            }
-        });
+            },
+            'app' => static function () {
+                return [
+                    'name' => Config::get('app.name'),
+                ];
+            },
+            'flash' => function () {
+                return [
+                    'message' => Session::get('success'),
+                ];
+            },
+            'errors' => function () {
+                if ($errors = Session::get('errors')) {
+                    $bags = $errors->getBags();
+
+                    return collect($bags)->map(function ($bag, $key) {
+                        return $bag->getMessages();
+                    });
+                }
+
+                return (object) [];
+            },
+            'success' => static function () {
+                return [
+                    'message' => Session::get('success'),
+                ];
+            },
+            'warning' => static function () {
+                return [
+                    'message' => Session::get('warning'),
+                ];
+            },
+            'info' => static function () {
+                return [
+                    'message' => Session::get('info'),
+                ];
+            },
+            'session' => static function () {
+                return [
+                    'message' => Session::get('session'),
+                ];
+            },
+        ]);
     }
 }

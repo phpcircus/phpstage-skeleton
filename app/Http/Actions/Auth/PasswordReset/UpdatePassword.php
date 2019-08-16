@@ -129,7 +129,7 @@ class UpdatePassword extends Action
      */
     protected function sendResetResponse(Request $request, $response)
     {
-        return redirect()->route('home')->with(['success' => trans($response)]);
+        return redirect()->route('dashboard')->with(['success' => trans($response)]);
     }
 
     /**

@@ -14,7 +14,7 @@
                             <inertia-link class="hover:underline text-blue-500" tabindex="-1" :href="route('verification.resend')">here to resend the verification email?</inertia-link>
                         </span>
                         <span class="flex self-start text-sm text-gray-600 mb-4">
-                            <inertia-link class="btn-text mr-auto" tabindex="-1" :href="route('home')">Home</inertia-link>
+                            <inertia-link class="btn btn-text mr-auto" tabindex="-1" :href="route('dashboard')">Dashboard</inertia-link>
                         </span>
                     </div>
                 </div>

@@ -26,7 +26,7 @@ class ResendVerify extends Action
     {
         $user = $request->user();
 
-        redirect_if($user->hasVerifiedEmail(), route('home'), ['info' => 'User already verified.']);
+        redirect_if($user->hasVerifiedEmail(), route('dashboard'), ['info' => 'User already verified.']);
 
         $user->sendEmailVerificationNotification();
 
