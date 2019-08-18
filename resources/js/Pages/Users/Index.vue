@@ -10,7 +10,7 @@
                     <option value="only">Only Trashed</option>
                 </select>
             </search-filter>
-            <inertia-link class="btn btn-blue" :href="route('users.create')">
+            <inertia-link v-if="$page.auth.user.is_admin" class="btn btn-blue" :href="route('users.create')">
                 <span>Create</span>
                 <span class="hidden md:inline">User</span>
             </inertia-link>

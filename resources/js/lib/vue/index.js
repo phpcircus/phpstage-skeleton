@@ -6,12 +6,14 @@ import Dates from 'Mixins/Dates';
 import VueStash from 'vue-stash';
 import VModal from 'vue-js-modal';
 import PortalVue from 'portal-vue';
+import Routing from 'Mixins/Routing';
 import Objects from '@/plugins/Objects';
 import Dialogs from '@/plugins/Dialogs';
 import GetsErrors from 'Mixins/GetsErrors';
 import ParsesUrls from 'Mixins/ParsesUrls';
 import VueWindowSize from 'vue-window-size';
 import Dispatcher from '@/plugins/Dispatcher';
+import ObjectMethods from 'Mixins/ObjectMethods';
 import { InertiaApp } from '@inertiajs/inertia-vue';
 import Snotify, { SnotifyPosition } from 'vue-snotify';
 import HandlesDropdowns from 'Mixins/HandlesDropdowns';
@@ -19,18 +21,13 @@ import ScreenChanges from 'Mixins/HandlesScreenSizeChanges';
 
 // Use mixins
 Vue.mixin(Dates);
+Vue.mixin(Routing);
 Vue.mixin(ParsesUrls);
 Vue.mixin(GetsErrors);
 Vue.mixin(ScreenChanges);
+Vue.mixin(ObjectMethods);
 Vue.mixin(HandlesDropdowns);
 
-Vue.mixin({
-    methods: {
-        route (...args) {
-            return window.route(...args).url();
-        },
-    },
-});
 
 // Use Dispatcher
 Vue.use(Dispatcher);
@@ -58,6 +55,9 @@ Vue.use(VModal, {
     componentName: 'modal-component',
 });
 
+// Use vue-window-size
+Vue.use(VueWindowSize);
+
 // Use Snotify for notifications
 Vue.use(Snotify, {
     toast: {
@@ -72,9 +72,6 @@ Vue.use(Snotify, {
 
 // Use InertiaApp
 Vue.use(InertiaApp);
-
-// Use vue-window-size
-Vue.use(VueWindowSize);
 
 // Filters
 Vue.filter('ucase', function (value) {

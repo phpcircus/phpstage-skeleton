@@ -7,9 +7,9 @@
                     <div class="px-10 py-12">
                         <h1 class="text-center font-bold text-3xl">Register</h1>
                         <div class="mx-auto mt-6 w-24 border-b-2" />
-                        <text-input v-model="form.name" :errors="$page.errors.name" class="mt-10" label="Name" type="name" autofocus />
-                        <text-input v-model="form.email" :errors="$page.errors.email" class="mt-10" label="Email" type="email" autocapitalize="off" />
-                        <text-input v-model="form.password" :errors="$page.errors.password" class="mt-6" label="Password" type="password" />
+                        <text-input v-model="form.name" :errors="getErrors('name')" class="mt-10" label="Name" type="name" autofocus />
+                        <text-input v-model="form.email" :errors="getErrors('email')" class="mt-10" label="Email" type="email" autocapitalize="off" />
+                        <text-input v-model="form.password" :errors="getErrors('password')" class="mt-6" label="Password" type="password" />
                         <text-input v-model="form.password_confirmation" class="mt-6" label="Confirm Password" type="password" />
                     </div>
                     <div class="px-10 py-4 bg-gray-100 border-t border-gray-200 flex justify-between items-center">

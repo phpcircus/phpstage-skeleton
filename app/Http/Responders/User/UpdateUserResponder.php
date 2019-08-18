@@ -15,6 +15,6 @@ class UpdateUserResponder extends Responder
     {
         $this->request->session()->flash('success', 'User updated!');
 
-        return redirect()->back();
+        return redirect()->back(303);
     }
 }

@@ -1,7 +1,7 @@
 {
     "name": "phpcircus/phpstage-skeleton",
     "description": "A Skeleton Laravel app for PHPStage projects",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "keywords": [
         "laravel",
         "skeleton",
@@ -49,8 +49,7 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true,
-        "bin-compat": "full"
+        "sort-packages": true
     },
     "extra": {
         "laravel": {
@@ -76,6 +75,7 @@
             "Tests\\": "tests/"
         }
     },
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "scripts": {
         "post-autoload-dump": [
