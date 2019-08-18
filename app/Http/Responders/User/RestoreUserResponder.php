@@ -15,6 +15,6 @@ class RestoreUserResponder extends Responder
     {
         $this->request->session()->flash('success', 'User restored!');
 
-        return redirect()->back();
+        return redirect()->back(303);
     }
 }
