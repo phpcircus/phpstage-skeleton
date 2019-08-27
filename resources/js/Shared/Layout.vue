@@ -27,7 +27,9 @@
                                 <div class="text-blue-900 group-hover:text-blue-700 focus:text-blue-700 mr-1 whitespace-no-wrap">
                                     <span class="inline">{{ $page.auth.user.name }}</span>
                                 </div>
-                                <icon class="w-5 h-5 group-hover:fill-blue-700 fill-blue-900 focus:fill-blue-700" name="cheveron-down" />
+                                <icon-base icon-fill="fill-blue-900" classes="ml-2 group-hover:fill-blue-700 focus:fill-blue-700">
+                                    <cheveron-down />
+                                </icon-base>
                             </div>
                             <div slot="dropdown" class="mt-2 py-2 shadow-lg bg-white rounded text-sm">
                                 <inertia-link class="block px-6 py-2 hover:bg-blue-500 hover:text-white" :href="route('users.edit', $page.auth.user.id)">My Profile</inertia-link>
@@ -56,8 +58,10 @@ import Logo from '@/Shared/Logo';
 import Modal from '@/Shared/Modal';
 import Dropdown from '@/Shared/Dropdown';
 import MainMenu from '@/Shared/MainMenu';
+import IconBase from '@/Shared/IconBase';
 import SiteFooter from '@/Shared/SiteFooter';
 import FlashMessage from '@/Shared/FlashMessage';
+import CheveronDown from '@/Shared/Icons/CheveronDown';
 
 export default {
     components: {
@@ -66,8 +70,10 @@ export default {
         Icon,
         Logo,
         MainMenu,
-        FlashMessage,
         SiteFooter,
+        IconBase,
+        FlashMessage,
+        CheveronDown,
     },
     props: {
         title: String,
