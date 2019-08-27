@@ -1,7 +1,9 @@
 <template>
     <div class="p-4 bg-yellow-300 rounded border border-yellow-700 flex items-center justify-between">
         <div class="flex items-center">
-            <icon name="trash" class="flex-no-shrink w-4 h-4 fill-yellow-800 mr-2" />
+            <icon-base icon-fill="fill-yellow-800" classes="mr-2 flex-no-shrink">
+                <trash />
+            </icon-base>
             <div class="text-yellow-800">
                 <slot />
             </div>
@@ -11,11 +13,13 @@
 </template>
 
 <script>
-import Icon from '@/Shared/Icon';
+import IconBase from '@/Shared/IconBase';
+import Trash from '@/Shared/Icons/Trash';
 
 export default {
     components: {
-        Icon,
+        Trash,
+        IconBase,
     },
 }
 </script>

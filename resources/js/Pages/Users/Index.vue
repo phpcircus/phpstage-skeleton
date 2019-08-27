@@ -23,19 +23,23 @@
                 </tr>
                 <tr v-for="user in users" :key="user.id" class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <inertia-link class="px-6 py-4 flex items-center focus:text-blue-500" :href="route('users.edit', user.id)">
+                        <inertia-link class="px-6 py-4 flex items-center focus:text-blue-500" :class="user.deleted_at ? 'text-gray-700 focus:text-gray-500 hover:text-gray-500' : ''" :href="route('users.edit', user.id)">
                             {{ user.name }}
-                            <icon v-if="user.deleted_at" name="trash" class="flex-no-shrink w-3 h-3 fill-gray-500 ml-2" />
+                            <icon-base v-if="user.deleted_at" icon-fill="fill-gray-500" classes="ml-2">
+                                <trash />
+                            </icon-base>
                         </inertia-link>
                     </td>
                     <td class="border-t">
-                        <inertia-link class="px-6 py-4 flex items-center" :href="route('users.edit', user.id)" tabindex="-1">
+                        <inertia-link class="px-6 py-4 flex items-center" :class="user.deleted_at ? 'text-gray-700 focus:text-gray-500 hover:text-gray-500' : ''" :href="route('users.edit', user.id)" tabindex="-1">
                             {{ user.email }}
                         </inertia-link>
                     </td>
                     <td class="border-t w-px">
                         <inertia-link class="px-4 flex items-center" :href="route('users.edit', user.id)" tabindex="-1">
-                            <icon name="cheveron-right" class="block w-6 h-6 fill-gray-500" />
+                            <icon-base icon-fill="fill-gray-500" classes="ml-2">
+                                <cheveron-right />
+                            </icon-base>
                         </inertia-link>
                     </td>
                 </tr>
@@ -51,13 +55,19 @@
 import _ from 'lodash';
 import Icon from '@/Shared/Icon';
 import Layout from '@/Shared/Layout';
+import IconBase from '@/Shared/IconBase';
+import Trash from '@/Shared/Icons/Trash';
 import SearchFilter from '@/Shared/SearchFilter';
+import CheveronRight from '@/Shared/Icons/CheveronRight';
 
 export default {
     components: {
         Icon,
+        Trash,
         Layout,
+        IconBase,
         SearchFilter,
+        CheveronRight,
     },
     props: {
         users: Array,

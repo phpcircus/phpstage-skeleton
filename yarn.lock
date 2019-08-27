@@ -7080,7 +7080,7 @@ vue-eslint-parser@^5.0.0:
     esquery "^1.0.1"
     lodash "^4.17.11"
 
-vue-good-table@^2.17.4:
+vue-good-table@^2.18.0:
   version "2.18.0"
   resolved "https://registry.yarnpkg.com/vue-good-table/-/vue-good-table-2.18.0.tgz#707c806cf5496e072cb3e0cb39bc6b6322403e89"
   integrity sha512-wC0I9D7TyfSf0zrYwIpNtXdbSPRir//q7TNpGZ8/MfgW5mLMspk9I0MVq856M3ecgwTqgqXXtO87+i0sgQxALg==

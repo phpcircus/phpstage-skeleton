@@ -2,13 +2,17 @@
     <div :class="display">
         <div :class="margin">
             <inertia-link class="flex items-center group py-3" :href="route('dashboard')">
-                <icon name="home" class="w-4 h-4 mr-2" :class="isPath('dashboard') ? 'fill-white' : 'fill-blue-300 group-hover:fill-white'" />
+                <icon-base classes="mr-2" :dynamic-classes="isPath('dashboard') ? 'fill-white' : 'fill-blue-300 group-hover:fill-white'">
+                    <home />
+                </icon-base>
                 <div :class="isPath('dashboard') ? 'text-white' : 'text-blue-200 group-hover:text-white'" class="text-xl">Dashboard</div>
             </inertia-link>
         </div>
         <div>
             <inertia-link class="flex items-center group py-3" :href="route('about')">
-                <icon name="user" class="w-4 h-4 mr-2" :class="isPath('about') ? 'fill-white' : 'fill-blue-300 group-hover:fill-white'" />
+                <icon-base classes="mr-2" :dynamic-classes="isPath('dashboard') ? 'fill-white' : 'fill-blue-300 group-hover:fill-white'">
+                    <user />
+                </icon-base>
                 <div :class="isPath('about') ? 'text-white' : 'text-blue-200 group-hover:text-white'" class="text-xl">About Me</div>
             </inertia-link>
         </div>
@@ -16,11 +20,15 @@
 </template>
 
 <script>
-import Icon from '@/Shared/Icon';
+import User from '@/Shared/Icons/User';
+import Home from '@/Shared/Icons/Home';
+import IconBase from '@/Shared/IconBase';
 
 export default {
     components: {
-        Icon,
+        User,
+        Home,
+        IconBase,
     },
     props: {
         display: {
