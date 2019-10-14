@@ -9,8 +9,8 @@
             </inertia-link>
         </div>
         <div>
-            <inertia-link class="flex items-center group py-3" :href="route('about')">
-                <icon-base classes="mr-2" :dynamic-classes="isPath('dashboard') ? 'fill-white' : 'fill-blue-300 group-hover:fill-white'">
+            <inertia-link class="flex items-center py-3 group" :href="route('about')">
+                <icon-base classes="mr-2" :dynamic-classes="isPath('about') ? 'fill-white' : 'fill-blue-300 group-hover:fill-white'">
                     <user />
                 </icon-base>
                 <div :class="isPath('about') ? 'text-white' : 'text-blue-200 group-hover:text-white'" class="text-xl">About Me</div>
