@@ -1,29 +1,37 @@
 <template>
-    <button type="button" @click="toggle">
-        <slot />
-        <portal v-if="show" to="dropdown">
-            <div>
-                <div style="position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 99998; background: black; opacity: .2" @click="toggle" />
-                <div ref="dropdown" style="position: absolute; z-index: 99999;" @click.stop>
-                    <slot name="dropdown" />
-                </div>
+    <div class="relative">
+        <button ref="trigger" type="button" class="elative" @click="toggle">
+            <slot name="trigger" />
+        </button>
+        <div v-if="show">
+            <div style="position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 90; background: black; opacity: .2" @click="close()" />
+            <div ref="dropdown" :style="getStyles()" @click.stop>
+                <slot name="dropdown" />
             </div>
-        </portal>
-    </button>
+        </div>
+    </div>
 </template>
 
 <script>
-import Popper from 'popper.js';
+import { mapValues } from 'lodash';
 
 export default {
     props: {
-        placement: {
+        width: {
             type: String,
-            default: 'bottom-end',
+            default: '140px',
         },
-        boundary: {
+        top: {
             type: String,
-            default: 'scrollParent',
+            default: '20',
+        },
+        right: {
+            type: String,
+            default: '10',
+        },
+        nav: {
+            type: Boolean,
+            default: false,
         },
     },
     data () {
@@ -31,28 +39,13 @@ export default {
             show: false,
         }
     },
-    watch: {
-        show (show) {
-            if (show) {
-            this.$nextTick(() => {
-                this.popper = new Popper(this.$el, this.$refs.dropdown, {
-                    placement: this.placement,
-                    modifiers: {
-                        preventOverflow: { boundariesElement: this.boundary },
-                    },
-                })
-            })
-            } else if (this.popper) {
-                setTimeout(() => this.popper.destroy(), 100);
-            }
-        },
+    beforeDestroy () {
+        document.removeEventListener('scroll', this.setTriggerZindex);
+        document.removeEventListener('keydown', this.hideDropdownOnEscape);
     },
     mounted () {
-        document.addEventListener('keydown', (e) => {
-            if (e.keyCode === 27) {
-                this.close();
-            }
-        });
+        document.addEventListener('keydown', this.hideDropdownOnEscape);
+        document.addEventListener('scroll', this.setTriggerZindex);
         this.$listen('dropdown-should-close', () => {
             this.close();
         });
@@ -63,6 +56,37 @@ export default {
         },
         toggle () {
             this.show = !this.show;
+        },
+        getStyles () {
+            let properties = {
+                width: this.width,
+                top: this.top,
+                right: this.right,
+            };
+
+            let mutatedProperties = mapValues(properties, property => {
+                if (property != '0' & ! property.endsWith('px')) {
+                    return `${property}px`;
+                }
+
+                return property;
+            });
+
+            return `position: absolute; width:${mutatedProperties.width}; top:${mutatedProperties.top}; right:${mutatedProperties.right}; z-index: 9999;`;
+        },
+        setTriggerZindex (e) {
+            let top = this.$refs.trigger.getBoundingClientRect().top;
+
+            if (top < 175 && ! this.nav) {
+                this.$refs.trigger.style.zIndex = 20;
+            } else {
+                this.$refs.trigger.style.zIndex = 70;
+            }
+        },
+        hideDropdownOnEscape (e) {
+            if (e.keyCode === 27) {
+                this.close();
+            }
         },
     },
 }
