@@ -1,7 +1,7 @@
 <template>
-    <svg ref="svg" xmlns="http://www.w3.org/2000/svg" :class="appliedClasses" :width="width" :height="height" viewBox="0 0 18 18" :aria-labelledby="iconName" role="presentation">
+    <svg ref="svg" xmlns="http://www.w3.org/2000/svg" :class="appliedClasses" :width="width" :height="height" :viewBox="`0 0 ${view}`" :aria-labelledby="iconName" role="presentation">
         <title :id="iconName" lang="en">{{ iconName }} icon</title>
-        <g><slot /></g>
+        <g fill-rule="evenodd"><slot /></g>
     </svg>
 </template>
 
@@ -31,6 +31,10 @@ export default {
         iconFill: {
             type: String,
             default: '',
+        },
+        view: {
+            type: String,
+            default: '20 20',
         },
     },
     computed: {

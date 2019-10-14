@@ -55,29 +55,6 @@ module.exports = {
             'indigo-800': theme('colors.indigo.800'),
             'indigo-900': theme('colors.indigo.900'),
         }),
-        width: theme => ({
-            auto: 'auto',
-            ...theme('spacing'),
-            '1/2': '50%',
-            '1/3': '33.33333%',
-            '2/3': '66.66667%',
-            '1/4': '25%',
-            '3/4': '75%',
-            '1/5': '20%',
-            '2/5': '40%',
-            '3/5': '60%',
-            '4/5': '80%',
-            '1/6': '16.66667%',
-            '5/6': '83.33333%',
-            '1/7': '14.286%',
-            '2/7': '28.572%',
-            '3/7': '42.858%',
-            '4/7': '57.144%',
-            '5/7': '71.43%',
-            '6/7': '85.716%',
-            full: '100%',
-            screen: '100vw',
-        }),
         minHeight: {
             '0': '0',
             full: '100%',
@@ -104,23 +81,49 @@ module.exports = {
             spacing: {
               '7': '1.75rem',
             },
+            width: theme => ({
+                auto: 'auto',
+                ...theme('spacing'),
+                '1/2': '50%',
+                '1/3': '33.33333%',
+                '2/3': '66.66667%',
+                '1/4': '25%',
+                '3/4': '75%',
+                '1/5': '20%',
+                '2/5': '40%',
+                '3/5': '60%',
+                '4/5': '80%',
+                '1/6': '16.66667%',
+                '5/6': '83.33333%',
+                '1/7': '14.286%',
+                '2/7': '28.572%',
+                '3/7': '42.858%',
+                '4/7': '57.144%',
+                '5/7': '71.43%',
+                '6/7': '85.716%',
+                full: '100%',
+                screen: '100vw',
+            }),
         },
     },
     variants: {
         textColor: ['responsive', 'hover', 'focus', 'group-hover'],
+        textWeight: ['responsive'],
         fill: ['hover', 'focus', 'group-hover'],
         width: ['responsive'],
         margin: ['last-child', 'responsive'],
+        backgroundColor: ['responsive', 'hover', 'focus', 'group-hover', 'odd'],
+        display: ['logged-in', 'logged-out', 'responsive'],
     },
     plugins: [
         require('./resources/js/lib/tailwindcss/plugins/tables')(),
+        require('./resources/js/lib/tailwindcss/plugins/variants'),
         function ({ addVariant, e }) {
             addVariant('last-child', ({ modifySelectors, separator }) => {
                 modifySelectors(({ className }) => {
-                    return `.${e(`last-child${separator}${className}`)}:last-child`
-                })
-            })
+                    return `.${e(`last-child${separator}${className}`)}:last-child`;
+                });
+            });
         },
-        require('@tailwindcss/custom-forms'),
-      ],
+    ],
 }

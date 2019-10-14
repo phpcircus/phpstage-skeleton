@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import IconBase from '@/Shared/IconBase';
 import Trash from '@/Shared/Icons/Trash';
+import IconBase from '@/Shared/IconBase';
 
 export default {
     components: {

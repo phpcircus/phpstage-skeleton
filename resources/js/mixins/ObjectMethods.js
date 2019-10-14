@@ -1,10 +1,18 @@
+import { isEmpty, has, size, find } from 'lodash';
+
 export default {
     methods: {
-        isObjectEmpty (obj) {
-            return this.$collection(obj).isEmpty();
+        isEmpty (obj) {
+            return isEmpty(obj);
         },
-        objectContains (obj, needle) {
-            return this.$collection(obj).has(needle);
+        contains (obj, needle) {
+            return has(obj, needle);
+        },
+        count (obj) {
+            return size(obj);
+        },
+        firstWhere (obj, test) {
+            return find(obj, test);
         },
     },
 }

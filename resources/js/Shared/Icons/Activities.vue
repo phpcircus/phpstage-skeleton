@@ -1,0 +1,3 @@
+<template>
+    <path d="M1,4 L3,4 L3,6 L1,6 L1,4 Z M5,4 L19,4 L19,6 L5,6 L5,4 Z M1,9 L3,9 L3,11 L1,11 L1,9 Z M5,9 L19,9 L19,11 L5,11 L5,9 Z M1,14 L3,14 L3,16 L1,16 L1,14 Z M5,14 L19,14 L19,16 L5,16 L5,14 Z"></path>
+</template>

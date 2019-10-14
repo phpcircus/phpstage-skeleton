@@ -9,7 +9,7 @@ class Checkbox {
     }
 
     addLabel (label) {
-        this.labelText.innerHTML = `${label}: `;
+        this.labelText.innerHTML = `${label} `;
 
         return this;
     }

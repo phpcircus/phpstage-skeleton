@@ -7,44 +7,44 @@ export default {
     watch: {
         '$page.success': {
             handler (value) {
-                if (value.message) {
+                if (value.success) {
                     this.$snotify.clear();
-                    this.$snotify.success(value.message, 'Success!');
+                    this.$snotify.success(value.success, 'Success!');
                 }
             },
             deep: true,
         },
         '$page.warning': {
             handler (value) {
-                if (value.message) {
+                if (value.warning) {
                     this.$snotify.clear();
-                    this.$snotify.error(value.message, 'Oops!');
+                    this.$snotify.error(value.warning, 'Oops!');
                 }
             },
             deep: true,
         },
         '$page.info': {
             handler (value) {
-                if (value.message) {
+                if (value.info) {
                     this.$snotify.clear();
-                    this.$snotify.info(value.message, 'Information:');
+                    this.$snotify.info(value.info, 'Information:');
                 }
             },
             deep: true,
         },
     },
     mounted () {
-        if (this.$page.success.message) {
+        if (this.$page.success.success) {
             this.$snotify.clear();
-            this.$snotify.success(this.$page.success.message, 'Success!');
+            this.$snotify.success(this.$page.success.success, 'Success!');
         }
-        if (this.$page.warning.message) {
+        if (this.$page.warning.warning) {
             this.$snotify.clear();
-            this.$snotify.error(this.$page.warning.message, 'Oops!');
+            this.$snotify.error(this.$page.warning.warning, 'Oops!');
         }
-        if (this.$page.info.message) {
+        if (this.$page.info.info) {
             this.$snotify.clear();
-            this.$snotify.info(this.$page.info.message, 'Information:');
+            this.$snotify.info(this.$page.info.info, 'Information:');
         }
     },
 }
