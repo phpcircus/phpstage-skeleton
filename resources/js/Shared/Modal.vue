@@ -28,6 +28,6 @@ export default {
             this.dialog.text = event.params.text;
             this.dialog.buttons = event.params.buttons;
         },
-    }
+    },
 }
 </script>
