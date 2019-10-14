@@ -4,7 +4,7 @@ export default {
     props: {
         label: {
             type: String,
-            default: () => 'Checkbox',
+            default: () => '',
         },
         checked: {
             type: Boolean,
