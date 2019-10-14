@@ -1,4 +1,4 @@
-import moment from 'moment-timezone';
+import moment from 'moment';
 import { config } from 'Config';
 
 export default {
