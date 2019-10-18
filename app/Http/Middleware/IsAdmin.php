@@ -20,7 +20,7 @@ class IsAdmin
             return $next($request);
         }
 
-        $request->session()->flash('warning', 'You must be an administrator to do that!');
+        flash('warning', 'You must be an administrator to do that!');
 
         return redirect()->back();
     }

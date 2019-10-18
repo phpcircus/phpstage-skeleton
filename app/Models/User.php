@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
+use App\Authorization\Policies;
 use App\Models\Traits\Uuid\HasUuids;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Traits\Permissions\FetchesModelPermissions;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
 class User extends Authenticatable implements AuthorizableContract, MustVerifyEmail
@@ -16,6 +19,7 @@ class User extends Authenticatable implements AuthorizableContract, MustVerifyEm
     use Notifiable;
     use SoftDeletes;
     use Authorizable;
+    use FetchesModelPermissions;
 
     /** @var array */
     protected $guarded = [];
@@ -26,6 +30,9 @@ class User extends Authenticatable implements AuthorizableContract, MustVerifyEm
     /** @var array */
     protected $casts = ['is_admin' => 'boolean'];
 
+    /** @var array */
+    protected $appends = ['is_super_admin'];
+
     /**
      * A user has many posts.
      *
@@ -34,6 +41,14 @@ class User extends Authenticatable implements AuthorizableContract, MustVerifyEm
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Get the is_super_admin attribute.
+     */
+    public function getIsSuperAdminAttribute(): bool
+    {
+        return $this->email === config('auth.admin.email');
     }
 
     /**
@@ -155,5 +170,32 @@ class User extends Authenticatable implements AuthorizableContract, MustVerifyEm
                 'password' => bcrypt($data['password']),
             ]);
         })->fresh();
+    }
+
+    /**
+     * Fetch the general User permissions that don't apply to a specific model.
+     * These permissions are based on the class, generically, not the model.
+     */
+    public function getAuthorizationDetails(): array
+    {
+        $policies = resolve(Policies::class)->getPolicies();
+
+        return collect($policies)->filter(function ($policy) {
+            return $this->isGeneralPolicy($policy);
+        })->mapWithKeys(function ($policy, $key) {
+            return [$policy => $this->can($policy)];
+        })->toArray();
+    }
+
+    /**
+     * Is the given policy a general policy, meant for determining general permissions for the class?
+     *
+     * @param  string  $policy
+     */
+    private function isGeneralPolicy(string $policy): bool
+    {
+        $model = class_basename(static::class);
+
+        return Str::endsWith($policy, "{$model}s");
     }
 }

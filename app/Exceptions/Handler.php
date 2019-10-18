@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Exception;
+use Inertia\Inertia;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
@@ -46,6 +48,24 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        $response = parent::render($request, $exception);
+
+        if ($request->header('X-Inertia') && in_array($response->status(), [500, 503, 404, 403])) {
+            flash('warning', 'Something went wrong.');
+
+            return Inertia::render('Dashboard/Index');
+        }
+
+        if ($exception instanceof AuthorizationException) {
+            if ($request->expectsJson()) {
+                return response()->json(['error' => 'Unauthorized.'], 403);
+            }
+
+            flash('warning', 'Something went wrong.');
+
+            return redirect()->route('dashboard');
+        }
+
+        return $response;
     }
 }

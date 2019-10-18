@@ -23,7 +23,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $actionNamespace = 'App\Http\Actions';
+    protected $actionNamespace = '';
 
     /**
      * Define your route model bindings, pattern filters, etc.

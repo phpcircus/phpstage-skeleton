@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\User;
-use App\Http\DTO\UserData;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 
@@ -22,7 +21,6 @@ class CreateAdminCommand extends Command
      * Create a new command instance.
      *
      * @param  \App\Models\User  $users
-     * @return void
      */
     public function __construct(User $users)
     {
@@ -39,15 +37,15 @@ class CreateAdminCommand extends Command
     {
         $this->comment('creating admin account...');
 
-        $data = UserData::fromArray([
+        $data = [
             'name' => $this->option('name'),
             'email' => $this->option('email'),
             'password' => $this->option('password'),
             'email_verified_at' => now(),
             'is_admin' => true,
-        ]);
+        ];
 
-        $admin = $this->users->createUser($data->only(['name', 'email', 'password', 'email_verified_at', 'is_admin']));
+        $admin = $this->users->createUser($data);
 
         $this->comment("Admin account for {$admin->name} successfully created.");
     }

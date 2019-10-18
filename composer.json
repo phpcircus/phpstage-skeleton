@@ -1,7 +1,7 @@
 {
     "name": "phpcircus/phpstage-skeleton",
     "description": "A Skeleton Laravel app for PHPStage projects",
-    "version": "2.0.3",
+    "version": "2.1.0",
     "keywords": [
         "laravel",
         "skeleton",
@@ -29,7 +29,7 @@
         "laravel/horizon": "^3.0",
         "laravel/tinker": "^1.0",
         "openpsa/ranger": "^0.4.0",
-        "perfect-oblivion/adr": "^0.2",
+        "perfect-oblivion/adr": "^0.3",
         "predis/predis": "^1.1",
         "reinink/remember-query-strings": "^0.1.0",
         "spatie/data-transfer-object": "^1.8",

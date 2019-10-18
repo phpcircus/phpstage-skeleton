@@ -52,8 +52,7 @@
 </template>
 
 <script>
-import _ from 'lodash';
-import Icon from '@/Shared/Icon';
+import { mapValues, throttle, pickBy } from 'lodash';
 import Layout from '@/Shared/Layout';
 import IconBase from '@/Shared/IconBase';
 import Trash from '@/Shared/Icons/Trash';
@@ -62,7 +61,6 @@ import CheveronRight from '@/Shared/Icons/CheveronRight';
 
 export default {
     components: {
-        Icon,
         Trash,
         Layout,
         IconBase,
@@ -83,8 +81,8 @@ export default {
     },
     watch: {
         form: {
-            handler: _.throttle(function () {
-                let query = _.pickBy(this.form);
+            handler: throttle(function () {
+                let query = pickBy(this.form);
                 this.$inertia.replace(this.route('users.list', Object.keys(query).length ? query : { remember: 'forget' }))
             }, 150),
             deep: true,
@@ -92,7 +90,7 @@ export default {
     },
     methods: {
         reset () {
-            this.form = _.mapValues(this.form, () => null);
+            this.form = mapValues(this.form, () => null);
         },
     },
 }

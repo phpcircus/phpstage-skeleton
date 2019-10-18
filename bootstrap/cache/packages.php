@@ -17,17 +17,6 @@
       0 => 'BeyondCode\\DumpServer\\DumpServerServiceProvider',
     ),
   ),
-  'devmarketer/laraflash' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'DevMarketer\\LaraFlash\\LaraFlashServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'LaraFlash' => 'DevMarketer\\LaraFlash\\LaraFlashFacade',
-    ),
-  ),
   'fideloper/proxy' => 
   array (
     'providers' => 
@@ -128,17 +117,6 @@
     'providers' => 
     array (
       0 => 'Tightenco\\Ziggy\\ZiggyServiceProvider',
-    ),
-  ),
-  'waavi/sanitizer' => 
-  array (
-    'providers' => 
-    array (
-      0 => 'Waavi\\Sanitizer\\Laravel\\SanitizerServiceProvider',
-    ),
-    'aliases' => 
-    array (
-      'Sanitizer' => 'Waavi\\Sanitizer\\Laravel\\Facade',
     ),
   ),
 );
