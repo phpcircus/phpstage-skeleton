@@ -45,11 +45,11 @@ Route::group(['as' => 'verification.', 'prefix' => 'email'], function ($router) 
 
 // Users
 Route::group(['middleware' => ['auth'], 'as' => 'users.', 'prefix' => 'users'], function ($router) {
-    $router->get('/', Actions\User\ListUsers::class)->name('list');
-    $router->get('/create', Actions\User\CreateUser::class)->name('create');
-    $router->post('/', Actions\User\StoreUser::class)->name('store');
-    $router->delete('/{user}', Actions\User\DeleteUser::class)->name('destroy');
-    $router->get('/{user}/edit', Actions\User\EditUser::class)->name('edit');
-    $router->put('/{user}', Actions\User\UpdateUser::class)->name('update');
-    $router->put('/{user}/restore', Actions\User\RestoreUser::class)->name('restore');
+    $router->get('/', Actions\User\ListUsers::class)->middleware(['can:listUsers'])->name('list');
+    $router->get('/create', Actions\User\CreateUser::class)->middleware(['can:administerUsers'])->name('create');
+    $router->post('/', Actions\User\StoreUser::class)->middleware(['can:administerUsers'])->name('store');
+    $router->delete('/{user}', Actions\User\DeleteUser::class)->middleware(['can:administerUsers'])->name('destroy');
+    $router->get('/{user}/edit', Actions\User\EditUser::class)->middleware(['can:updateUser,user'])->name('edit');
+    $router->put('/{user}', Actions\User\UpdateUser::class)->middleware(['can:updateUser,user'])->name('update');
+    $router->put('/{user}/restore', Actions\User\RestoreUser::class)->middleware(['can:administerUsers'])->name('restore');
 });

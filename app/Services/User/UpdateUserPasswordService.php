@@ -3,7 +3,7 @@
 namespace App\Services\User;
 
 use App\Models\User;
-use App\Http\DTO\UserData;
+use Illuminate\Support\Arr;
 use PerfectOblivion\Services\Traits\SelfCallingService;
 
 class UpdateUserPasswordService
@@ -27,14 +27,14 @@ class UpdateUserPasswordService
      * Handle the call to the service.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Http\DTO\UserData  $data
+     * @param  array  $data
      *
      * @return mixed
      */
-    public function run(User $user, UserData $data)
+    public function run(User $user, array $data)
     {
-        $this->validator->validate($data->toArray());
+        $this->validator->validate($data);
 
-        return $user->updateUserPassword($data->only(['password']));
+        return $user->updateUserPassword(Arr::only($data, ['password']));
     }
 }

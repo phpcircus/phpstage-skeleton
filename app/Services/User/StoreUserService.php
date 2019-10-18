@@ -3,7 +3,7 @@
 namespace App\Services\User;
 
 use App\Models\User;
-use App\Http\DTO\UserData;
+use Illuminate\Support\Arr;
 use PerfectOblivion\Services\Traits\SelfCallingService;
 
 class StoreUserService
@@ -31,14 +31,14 @@ class StoreUserService
     /**
      * Handle the call to the service.
      *
-     * @param  \App\Http\DTO\UserData  $user
+     * @param  array  $data
      *
      * @return \App\Models\User
      */
-    public function run(UserData $user)
+    public function run(array $data)
     {
-        $this->validator->validate($user->toArray());
+        $this->validator->validate($data);
 
-        return $this->users->createUser($user->only(['id', 'name', 'email', 'password', 'is_admin']));
+        return $this->users->createUser(Arr::only($data, ['id', 'name', 'email', 'password', 'is_admin']));
     }
 }

@@ -9,11 +9,7 @@
     </head>
 
     <body class="font-lato leading-none text-gray-900 antialiased">
-
-        <div id="app" data-page="{{ json_encode($page) }}">
-            <vue-snotify></vue-snotify>
-        </div>
-
+        @inertia
     </body>
 
 </html>
