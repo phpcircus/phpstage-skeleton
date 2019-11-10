@@ -7,6 +7,7 @@ use App\Authorization\Policies;
 use App\Models\Traits\Uuid\HasUuids;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\Builders\User\UserQueryBuilder;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -34,6 +35,18 @@ class User extends Authenticatable implements AuthorizableContract, MustVerifyEm
     protected $appends = ['is_super_admin'];
 
     /**
+     * Create a new Eloquent query builder for the model.
+     *
+     * @param  \Illuminate\Database\Query\Builder  $query
+     *
+     * @return \Illuminate\Database\Eloquent\Builder|static
+     */
+    public function newEloquentBuilder($query)
+    {
+        return new UserQueryBuilder($query);
+    }
+
+    /**
      * A user has many posts.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -52,42 +65,6 @@ class User extends Authenticatable implements AuthorizableContract, MustVerifyEm
     }
 
     /**
-     * Order query by user name.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $builder
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeOrderByName($builder)
-    {
-        $builder->orderBy('name');
-    }
-
-    /**
-     * Filter the query.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $builder
-     * @param  array  $filters
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeFilter($builder, array $filters)
-    {
-        $builder->when($filters['search'] ?? null, function ($builder, $search) {
-            $builder->where(function ($builder) use ($search) {
-                $builder->where('name', 'like', '%'.$search.'%')
-                    ->orWhere('email', 'like', '%'.$search.'%');
-            });
-        })->when($filters['trashed'] ?? null, function ($builder, $trashed) {
-            if ('with' === $trashed) {
-                $builder->withTrashed();
-            } elseif ('only' === $trashed) {
-                $builder->onlyTrashed();
-            }
-        });
-    }
-
-    /**
      * Retrieve the model for a bound value.
      *
      * @param  mixed  $value
@@ -103,8 +80,6 @@ class User extends Authenticatable implements AuthorizableContract, MustVerifyEm
 
     /**
      * Create a user with the provided data.
-     *
-     * @param  array  $user
      *
      * @return \App\Models\User
      */
@@ -145,8 +120,6 @@ class User extends Authenticatable implements AuthorizableContract, MustVerifyEm
     /**
      * Update user data.
      *
-     * @param  array  $data
-     *
      * @return \App\Models\User
      */
     public function updateUserData(array $data)
@@ -158,8 +131,6 @@ class User extends Authenticatable implements AuthorizableContract, MustVerifyEm
 
     /**
      * Update user password.
-     *
-     * @param  array  $data
      *
      * @return \App\Models\User
      */
@@ -189,8 +160,6 @@ class User extends Authenticatable implements AuthorizableContract, MustVerifyEm
 
     /**
      * Is the given policy a general policy, meant for determining general permissions for the class?
-     *
-     * @param  string  $policy
      */
     private function isGeneralPolicy(string $policy): bool
     {

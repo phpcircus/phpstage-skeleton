@@ -19,6 +19,10 @@
   }
 }
 
+.form-checkbox {
+  @apply border border-blue-300 !important;
+}
+
 .form-select {
   @apply .pr-6;
 

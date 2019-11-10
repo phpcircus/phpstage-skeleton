@@ -5,7 +5,6 @@ import { config } from 'Config';
 import Dates from 'Mixins/Dates';
 import VueStash from 'vue-stash';
 import VModal from 'vue-js-modal';
-import PortalVue from 'portal-vue';
 import Dialogs from '@/plugins/Dialogs';
 import GetsErrors from 'Mixins/GetsErrors';
 import ParsesUrls from 'Mixins/ParsesUrls';
@@ -50,9 +49,6 @@ Vue.use(VueHead, {
     complement: config.appName,
   });
 
-// Use PortalVue
-Vue.use(PortalVue);
-
 // Use Vue-Stash for state management
 Vue.use(VueStash);
 
@@ -65,7 +61,7 @@ Vue.use(VModal, {
 Vue.use(Snotify, {
     toast: {
         position: SnotifyPosition.rightTop,
-        timeout: 1000,
+        timeout: 1500,
         showProgressBar: true,
         closeOnClick: false,
         pauseOnHover: true,
@@ -105,6 +101,7 @@ new Vue({
     },
     methods: {
         listenForEvents () {
+            /* global Echo */
             //
         },
     },
