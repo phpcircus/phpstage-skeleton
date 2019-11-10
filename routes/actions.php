@@ -31,12 +31,12 @@ Route::group(['middleware' => ['guest'], 'as' => 'password.', 'prefix' => 'passw
     $router->post('/reset', Actions\Auth\PasswordReset\UpdatePassword::class)->name('update');
 });
 
-/*
- * Email Verification
- *
- * Middleware is defined inside the constructor of each Action.
- * ['auth', 'signed', 'throttle']
- */
+//
+// Email Verification
+//
+// Middleware is defined inside the constructor of each Action.
+// ['auth', 'signed', 'throttle']
+//
 Route::group(['as' => 'verification.', 'prefix' => 'email'], function ($router) {
     $router->get('/verify', Actions\Auth\EmailVerification\ShowVerification::class)->name('notice');
     $router->get('/verify/{id}', Actions\Auth\EmailVerification\Verify::class)->name('verify');
